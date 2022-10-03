@@ -1,4 +1,3 @@
-
 @include('layouts.dashboard.head')
 @include('layouts.dashboard.nav')
 @include('layouts.dashboard.main_sidebar')

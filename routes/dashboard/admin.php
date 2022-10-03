@@ -2,6 +2,7 @@
 
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\Dashboard\DashboardController;
+use Mcamara\LaravelLocalization\Facades\LaravelLocalization;
 
 /*
 |--------------------------------------------------------------------------
@@ -13,7 +14,11 @@ use App\Http\Controllers\Dashboard\DashboardController;
 | contains the "web" middleware group. Now create something great!
 |
 */
-Route::prefix('dashboard/')->name('dashboard.')->group(function(){
+Route::group([
+	'prefix' =>LaravelLocalization::setLocale() .'/dashboard' ,
+	'middleware' => [ 'localeSessionRedirect', 'localizationRedirect', 'localeViewPath' ],
 
-    Route::get('check',[DashboardController::class,'index'])->name('index');
+],function(){
+
+    Route::get('check',[DashboardController::class,'index'])->name('dashboard.index');
 });
