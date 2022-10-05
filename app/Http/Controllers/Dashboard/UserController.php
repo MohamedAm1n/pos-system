@@ -3,84 +3,75 @@
 namespace App\Http\Controllers\Dashboard;
 
 use App\Http\Controllers\Controller;
+use App\Http\Requests\StoreUserRequest;
 use App\Models\User;
 use Illuminate\Http\Request;
 
 class UserController extends Controller
 {
-    /**
-     * Display a listing of the resource.
-     *
-     * @return \Illuminate\Http\Response
-     */
-    public function index()
+    public function __construct()
     {
-        //
+        $this->middleware(['permission:users_read'])->only('list');
+        $this->middleware(['permission:users_create'])->only('create');
+        $this->middleware(['permission:users_update'])->only('update');
+        $this->middleware(['permission:users_delete'])->only('destroy');
     }
 
-    /**
-     * Show the form for creating a new resource.
-     *
-     * @return \Illuminate\Http\Response
-     */
+    public function index(Request $request)
+    {
+        if($request->table_search) {
+            $users=User::where('first_name','like','%' . $request->table_search . '$')
+            ->orWhere('last_name','like','%' . $request->table_search . '%')->get();
+        }
+        $users=User::all();
+        return view('dashboard.users.all_users',['users'=>$users]);
+    }
+
+    public function list(){
+
+    
+}
     public function create()
     {
-        //
+        return view('dashboard.users.create');
     }
 
-    /**
-     * Store a newly created resource in storage.
-     *
-     * @param  \Illuminate\Http\Request  $request
-     * @return \Illuminate\Http\Response
-     */
-    public function store(Request $request)
+    public function store(StoreUserRequest $request)
     {
-        //
+        // dd($request->permissions);
+        $data=$request->validated();
+        $data=$request->except(['password','password_confirmation']);
+        if(!$data)
+            return back()->with('errors');
+
+        $data['password']=bcrypt($request['password']);
+
+        $user=User::create($data);
+        $user->attachRole('Administrator');
+        $user->attachPermissions($data['permissions']);
+
+        return redirect(route('users.list'))->with('message','user added successfully');
     }
 
-    /**
-     * Display the specified resource.
-     *
-     * @param  \App\Models\User  $user
-     * @return \Illuminate\Http\Response
-     */
     public function show(User $user)
     {
         //
     }
 
-    /**
-     * Show the form for editing the specified resource.
-     *
-     * @param  \App\Models\User  $user
-     * @return \Illuminate\Http\Response
-     */
     public function edit(User $user)
     {
-        //
+
     }
 
-    /**
-     * Update the specified resource in storage.
-     *
-     * @param  \Illuminate\Http\Request  $request
-     * @param  \App\Models\User  $user
-     * @return \Illuminate\Http\Response
-     */
     public function update(Request $request, User $user)
     {
         //
     }
 
-    /**
-     * Remove the specified resource from storage.
-     *
-     * @param  \App\Models\User  $user
-     * @return \Illuminate\Http\Response
-     */
     public function destroy(User $user)
     {
-        //
+        $deleted_user=$user->id;
+        User::destroy($deleted_user);
+        return back();
     }
 }

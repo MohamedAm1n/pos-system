@@ -2,6 +2,7 @@
 
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\Dashboard\DashboardController;
+use App\Http\Controllers\Dashboard\UserController;
 use Mcamara\LaravelLocalization\Facades\LaravelLocalization;
 
 /*
@@ -16,9 +17,17 @@ use Mcamara\LaravelLocalization\Facades\LaravelLocalization;
 */
 Route::group([
 	'prefix' =>LaravelLocalization::setLocale() .'/dashboard' ,
-	'middleware' => [ 'localeSessionRedirect', 'localizationRedirect', 'localeViewPath' ],
+	'middleware' => [ 'localeSessionRedirect', 'localizationRedirect', 'localeViewPath' ,'auth'],
 
 ],function(){
 
-    Route::get('check',[DashboardController::class,'index'])->name('dashboard.index');
+    Route::get('/check',[DashboardController::class,'index'])->name('dashboard.index');
+    Route::get('/users',[UserController::class,'index'])->name('users.index');
+    // Route::get('/users/',[UserController::class,'list'])->name('users.list');
+    Route::get('/users/create',[UserController::class,'create'])->name('users.create');
+    Route::post('/users/store',[UserController::class,'store'])->name('users.store');
+    Route::get('/users/edit/{user}',[UserController::class,'edit'])->name('users.edit');
+    Route::post('/users/delete/{user}',[UserController::class,'destroy'])->name('users.delete');
+
+
 });
