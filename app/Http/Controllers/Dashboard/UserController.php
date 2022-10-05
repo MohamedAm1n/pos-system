@@ -19,11 +19,12 @@ class UserController extends Controller
 
     public function index(Request $request)
     {
-        if($request->table_search) {
-            $users=User::where('first_name','like','%' . $request->table_search . '$')
-            ->orWhere('last_name','like','%' . $request->table_search . '%')->get();
-        }
-        $users=User::all();
+        $users=User::whereRoleIs('administrator')->when($request->search,function($query) use($request){
+                return $query->where('first_name','like' ,'%' . $request->search . '%')
+                ->orWhere('last_name','like','%' . $request->search . '%');
+            })->latest()->paginate(10);
+    
+
         return view('dashboard.users.all_users',['users'=>$users]);
     }
 
@@ -50,7 +51,7 @@ class UserController extends Controller
         $user->attachRole('Administrator');
         $user->attachPermissions($data['permissions']);
 
-        return redirect(route('users.list'))->with('message','user added successfully');
+        return redirect(route('users.index'))->with('message','user added successfully');
     }
 
     public function show(User $user)

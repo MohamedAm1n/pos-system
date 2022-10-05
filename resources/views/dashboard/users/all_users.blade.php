@@ -24,6 +24,7 @@
     <section class="content">
         <div class="container-fluid">
             <!-- /.row -->
+            <form action="{{ route('users.index') }}" method="GET">
             <div class="row">
                 <div class="col-12">
                     <div class="card">
@@ -36,7 +37,7 @@
                             @endif
                             <div class="card-tools">
                                 <div class="input-group input-group-sm" style="width: 150px;">
-                                    <input type="text" name="table_search" class="form-control float-right"
+                                    <input type="text" name="search" value="{{ request()->search }}" class="form-control float-right"
                                         placeholder="Search">
                                     <div class="input-group-append">
                                         <button type="submit" class="btn btn-default">
@@ -106,13 +107,15 @@
                                     @endforeach
                                 </tbody>
                             </table>
+        {{ $users->appends(request()->query())->links() }}
+
                         </div>
                         <!-- /.card-body -->
                     </div>
                     <!-- /.card -->
                 </div>
             </div>
-
+        </form>
 
         </div><!-- /.container-fluid -->
     </section>
