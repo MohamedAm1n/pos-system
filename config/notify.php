@@ -13,7 +13,7 @@ return [
     |
     */
 
-    'theme' => env('NOTIFY_THEME', 'light'),
+    'theme' => env('NOTIFY_THEME', 'dark'),
 
     /*
     |--------------------------------------------------------------------------
@@ -36,7 +36,7 @@ return [
     |
     */
 
-    'timeout'   => 300,
+    'timeout'   => 3000,
 
     /*
     |--------------------------------------------------------------------------
@@ -55,6 +55,12 @@ return [
             'type'    => 'success',
             'model'   => 'connect',
             'title'   => 'User Updated',
+        ],
+        'user-created' => [
+            'message' => 'The user has been created successfully.',
+            'type'    => 'success',
+            'model'   => 'connect',
+            'title'   => 'User Created',
         ],
         'user-deleted' => [
             'message' => 'The user has been deleted successfully.',

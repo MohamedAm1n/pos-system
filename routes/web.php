@@ -25,12 +25,9 @@ Route::group([
 	/** ADD ALL LOCALIZED ROUTES INSIDE THIS GROUP **/
 	Route::get('/', function()
 	{
-		return view('welcome');
+		return redirect(route('dashboard.index'));
 	});
 
-	Route::get('test',function(){
-		return "test";
-	});
 
 
 /** OTHER PAGES THAT SHOULD NOT BE LOCALIZED **/

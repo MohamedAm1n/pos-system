@@ -6,6 +6,7 @@ use notify;
 use App\Models\User;
 use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
+use Intervention\Image\Facades\Image;
 use App\Http\Requests\StoreUserRequest;
 
 class UserController extends Controller
@@ -20,11 +21,16 @@ class UserController extends Controller
 
     public function index(Request $request)
     {
-        smilify('success', 'You are successfully reconnected');
-        $users=User::whereRoleIs('administrator')->when($request->search,function($query) use($request){
+
+        if ($request->search){
+
+            $users=User::whereRoleIs('super_admin')->when($request->search,function($query) use($request){
                 return $query->where('first_name','like' ,'%' . $request->search . '%')
                 ->orWhere('last_name','like','%' . $request->search . '%');
-            })->latest()->paginate(10);
+            })->latest()->paginate(1);
+        }
+        else 
+            $users=User::paginate(10);
     
 
         return view('dashboard.users.all_users',['users'=>$users]);
@@ -41,18 +47,26 @@ class UserController extends Controller
 
     public function store(StoreUserRequest $request)
     {
-        // dd($request->permissions);
         $data=$request->validated();
-        $data=$request->except(['password','password_confirmation']);
+        $data=$request->except(['password','password_confirmation','image']);
         if(!$data)
             return back()->with('errors');
 
         $data['password']=bcrypt($request['password']);
+        
+        $img = Image::make($request->image)->resize(null, 200, function ($constraint) {
+            $constraint->aspectRatio();
+        
+        })->save(public_path('uploads/user_images/'. $request->image->hashName()));
+
+        $data['image']= $request->image->hashName();
+
+
 
         $user=User::create($data);
         $user->attachRole('Administrator');
         $user->attachPermissions($data['permissions']);
-        notify()->success('Laravel Notify is awesome!');
+        notify()->success('User Added Successfully!');
         return redirect(route('users.index'));
     }
 
@@ -75,7 +89,7 @@ class UserController extends Controller
     {
         $deleted_user=$user->id;
         User::destroy($deleted_user);
-        notify()->success('User Deleted successfully!');
+        notify()->preset('user-deleted');
 
         return back();
     }

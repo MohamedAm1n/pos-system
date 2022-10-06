@@ -14,6 +14,7 @@ return[
     'first_name'=>'الأسم الأول',
     'last_name'=>'الأسم الأخير',
     'email'=>'البريد الإلكتروني',
+    'image'=>'الصورة الشخصية',
     'password'=>'كلمة المرور',
     'password_confirmation'=>'تأكيد كلمة المرور',
 ];

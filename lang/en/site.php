@@ -16,6 +16,7 @@ return [
     'last_name'     =>'last name',
     'email'         =>'email',
     'password'      =>'password',
+    'image'=>'personal image',
     'password_confirmation'=>'password confirmation',
 ];
 

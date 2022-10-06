@@ -1,12 +1,13 @@
 <body dir="{{ LaravelLocalization::getCurrentLocaleDirection() }}" class="hold-transition sidebar-mini layout-fixed">
     <div class="wrapper">
         <!-- Preloader -->
-        <div class="preloader flex-column justify-content-center align-items-center">
+        <div class="preloader flex-column justify-content-center align-items-center"> 
+            
             <img class="animation__shake" src="{{ asset('dashboard/dist/img/AdminLTELogo.png') }}" alt="AdminLTELogo" height="60" width="60">
         </div>
         {{-- main-header navbar navbar-expand navbar-white navbar-light --}}
 
-        <nav class="navbar navbar-expand-lg main-header navbar-light " style="background-color: #6fb6e9;">
+        <nav class="navbar navbar-expand main-header navbar-light">
 
 
 

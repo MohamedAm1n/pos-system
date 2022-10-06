@@ -1,13 +1,11 @@
-
-
 <!-- Control Sidebar -->
 <aside class="control-sidebar control-sidebar-dark">
     <!-- Control sidebar content goes here -->
+    <x:notify-messages />
 </aside>
 <!-- /.control-sidebar -->
 </div>
 <!-- ./wrapper -->
-
 <!-- jQuery -->
 <script src="{{ asset('dashboard/plugins/jquery/jquery.min.js') }}"></script>
 <!-- jQuery UI 1.11.4 -->
@@ -15,7 +13,6 @@
 <!-- Resolve conflict in jQuery UI tooltip with Bootstrap tooltip -->
 <script>
     $.widget.bridge('uibutton', $.ui.button)
-
 </script>
 <!-- Bootstrap 4 -->
 <script src="{{ asset('dashboard/plugins/bootstrap/js/bootstrap.bundle.min.js') }}"></script>
@@ -45,6 +42,5 @@
 <script src="{{ asset('dashboard/dist/js/pages/dashboard.js') }}"></script>
 {{-- @include('notify::messages') --}}
 @notifyJs
-<x:notify-messages/>
 </body>
 </html>

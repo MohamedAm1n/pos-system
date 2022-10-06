@@ -26,7 +26,7 @@
     <!-- /.card-header -->
     @include('partials._errors')
     <!-- form start -->
-    <form action="{{ route('users.store') }}" method="POST">
+    <form action="{{ route('users.store') }}" method="POST" enctype="multipart/form-data">
         @csrf
         <div class="card-body card-responsive">
             <div class="form-group">
@@ -40,6 +40,11 @@
             <div class="form-group">
                 <label for="exampleInputEmail1">@lang('site.email') </label>
                 <input type="email" class="form-control" name="email" value="{{ old('email') }}" id="exampleInputEmail1" placeholder="@lang('site.email')">
+            </div>
+
+            <div class="form-group">
+                <label for="exampleInputImage">@lang('site.image') </label>
+                <input type="file" class="form-control" name="image" id="exampleInputImage" placeholder="@lang('site.image')">
             </div>
             <div class="form-group">
                 <label for="exampleInputPassword1">@lang('site.password')</label>
