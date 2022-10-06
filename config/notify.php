@@ -36,7 +36,7 @@ return [
     |
     */
 
-    'timeout'   => 5000,
+    'timeout'   => 300,
 
     /*
     |--------------------------------------------------------------------------
@@ -52,6 +52,12 @@ return [
         // An example preset 'user updated' Connectify notification.
         'user-updated' => [
             'message' => 'The user has been updated successfully.',
+            'type'    => 'success',
+            'model'   => 'connect',
+            'title'   => 'User Updated',
+        ],
+        'user-deleted' => [
+            'message' => 'The user has been deleted successfully.',
             'type'    => 'success',
             'model'   => 'connect',
             'title'   => 'User Updated',

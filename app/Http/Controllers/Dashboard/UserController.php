@@ -2,10 +2,11 @@
 
 namespace App\Http\Controllers\Dashboard;
 
-use App\Http\Controllers\Controller;
-use App\Http\Requests\StoreUserRequest;
+use notify;
 use App\Models\User;
 use Illuminate\Http\Request;
+use App\Http\Controllers\Controller;
+use App\Http\Requests\StoreUserRequest;
 
 class UserController extends Controller
 {
@@ -19,6 +20,7 @@ class UserController extends Controller
 
     public function index(Request $request)
     {
+        smilify('success', 'You are successfully reconnected');
         $users=User::whereRoleIs('administrator')->when($request->search,function($query) use($request){
                 return $query->where('first_name','like' ,'%' . $request->search . '%')
                 ->orWhere('last_name','like','%' . $request->search . '%');
@@ -50,8 +52,8 @@ class UserController extends Controller
         $user=User::create($data);
         $user->attachRole('Administrator');
         $user->attachPermissions($data['permissions']);
-
-        return redirect(route('users.index'))->with('message','user added successfully');
+        notify()->success('Laravel Notify is awesome!');
+        return redirect(route('users.index'));
     }
 
     public function show(User $user)
@@ -73,6 +75,8 @@ class UserController extends Controller
     {
         $deleted_user=$user->id;
         User::destroy($deleted_user);
+        notify()->success('User Deleted successfully!');
+
         return back();
     }
 }

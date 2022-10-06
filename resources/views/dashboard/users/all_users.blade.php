@@ -24,7 +24,6 @@
     <section class="content">
         <div class="container-fluid">
             <!-- /.row -->
-            <form action="{{ route('users.index') }}" method="GET">
             <div class="row">
                 <div class="col-12">
                     <div class="card">
@@ -35,6 +34,7 @@
                             <h3 class="card-title disabled"><a class="btn btn-primary btn-sm disabled " href="#"><i class="fa fa-plus"></i> {{ __('site.create') }}</a></h3>
 
                             @endif
+                            <form action="{{ route('users.index') }}" method="GET">
                             <div class="card-tools">
                                 <div class="input-group input-group-sm" style="width: 150px;">
                                     <input type="text" name="search" value="{{ request()->search }}" class="form-control float-right"
@@ -46,6 +46,7 @@
                                     </div>
                                 </div>
                             </div>
+                            </form>
                         </div>
                         <!-- /.card-header -->
                         <div class="card-body table-responsive p-0">
@@ -115,7 +116,7 @@
                     <!-- /.card -->
                 </div>
             </div>
-        </form>
+        
 
         </div><!-- /.container-fluid -->
     </section>
