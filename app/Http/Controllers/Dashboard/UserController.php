@@ -29,16 +29,16 @@ class UserController extends Controller
                 ->orWhere('last_name','like','%' . $request->search . '%');
             })->latest()->paginate(1);
         }
-        else 
+        else
             $users=User::paginate(10);
-    
+
 
         return view('dashboard.users.all_users',['users'=>$users]);
     }
 
     public function list(){
 
-    
+
 }
     public function create()
     {
@@ -47,24 +47,25 @@ class UserController extends Controller
 
     public function store(StoreUserRequest $request)
     {
+        // dd($request->all());
         $data=$request->validated();
-        $data=$request->except(['password','password_confirmation','image']);
+        $data=$request->except(['password','password_confirmation']);
         if(!$data)
             return back()->with('errors');
 
         $data['password']=bcrypt($request['password']);
-        
+
         $img = Image::make($request->image)->resize(null, 200, function ($constraint) {
             $constraint->aspectRatio();
-        
+
         })->save(public_path('uploads/user_images/'. $request->image->hashName()));
 
-        $data['image']= $request->image->hashName();
+        $data['image']= $img;
 
 
 
         $user=User::create($data);
-        $user->attachRole('Administrator');
+        $user->attachRole('admin');
         $user->attachPermissions($data['permissions']);
         notify()->success('User Added Successfully!');
         return redirect(route('users.index'));
