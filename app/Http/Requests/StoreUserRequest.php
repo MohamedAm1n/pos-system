@@ -27,7 +27,8 @@ class StoreUserRequest extends FormRequest
             'first_name'=>'required|string|min:3',
             'last_name'=>'required|string|min:3',
             'email'=>'required|email|unique:users,email',
-            'password'=>'required|confirmed'
+            'password'=>'required|confirmed',
+            'image'=>'required|image',
         ];
     }
 }

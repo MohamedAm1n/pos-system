@@ -8,7 +8,6 @@ use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
 use Intervention\Image\Facades\Image;
 use App\Http\Requests\StoreUserRequest;
-
 class UserController extends Controller
 {
     public function __construct()
@@ -24,7 +23,7 @@ class UserController extends Controller
 
         if ($request->search){
 
-            $users=User::whereRoleIs('super_admin')->when($request->search,function($query) use($request){
+            $users=User::whereRoleIs('admin')->when($request->search,function($query) use($request){
                 return $query->where('first_name','like' ,'%' . $request->search . '%')
                 ->orWhere('last_name','like','%' . $request->search . '%');
             })->latest()->paginate(1);
@@ -33,7 +32,7 @@ class UserController extends Controller
             $users=User::paginate(10);
 
 
-        return view('dashboard.users.all_users',['users'=>$users]);
+        return view('dashboard.users.user_index',['users'=>$users]);
     }
 
     public function list(){
@@ -47,24 +46,28 @@ class UserController extends Controller
 
     public function store(StoreUserRequest $request)
     {
-        // dd($request->all());
+
         $data=$request->validated();
-        $data=$request->except(['password','password_confirmation']);
+        $data=$request->except(['password','password_confirmation','image']);
         if(!$data)
             return back()->with('errors');
 
         $data['password']=bcrypt($request['password']);
 
-        $img = Image::make($request->image)->resize(null, 200, function ($constraint) {
-            $constraint->aspectRatio();
+
+
+        if($request->file('image')){
+            Image::make($request->image)->resize(300, null, function ($constraint) {
+                $constraint->aspectRatio();
 
         })->save(public_path('uploads/user_images/'. $request->image->hashName()));
 
-        $data['image']= $img;
-
+        $data['image']=  $request->image->hashName();
+    }
 
 
         $user=User::create($data);
+        dd($user);
         $user->attachRole('admin');
         $user->attachPermissions($data['permissions']);
         notify()->success('User Added Successfully!');
