@@ -69,7 +69,6 @@ class UserController extends Controller
 
 
         $user=User::create($data);
-        dd($user);
         $user->attachRole('admin');
         $user->attachPermissions($data['permissions']);
         notify()->success('User Added Successfully!');

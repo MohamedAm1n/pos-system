@@ -40,6 +40,16 @@
 <script src="{{asset('dashboard/dist/js/demo.js')}}"></script>
 <!-- AdminLTE dashboard demo (This is only for demo purposes) -->
 <script src="{{ asset('dashboard/dist/js/pages/dashboard.js') }}"></script>
+<script>
+    $(".image").change(function(){
+
+        var reader = new FileReader();
+        reader.onload = function(e){
+            $(".image-preview").attr('src',e.target.result);
+        }
+        reader.readAsDataURL(this.files[0]);
+    });
+</script>
 {{-- @include('notify::messages') --}}
 @notifyJs
 </body>

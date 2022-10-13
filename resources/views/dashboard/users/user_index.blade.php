@@ -70,7 +70,7 @@
                                     <td>{{ $counter++ }}</td>
                                     <td>{{ $user->first_name }}</td>
                                     <td>{{ $user->last_name }}</td>
-                                    <td> <img src="{{$user->image_path}}" style="width:100px" class="img-thumbnail" > </td>
+                                    <td> <img src="{{$user->image_path}}" style="width:100px" class="img-thumbnail"> </td>
                                     <td>{{ $user->email }}</td>
                                     <td>
                                         @if(auth()->user()->hasPermission('users_update'))

@@ -38,14 +38,17 @@
                 <input type="text" class="form-control" name="last_name" value="{{ old('last_name') }}" id="last_name" placeholder="@lang('site.last_name')">
             </div>
             <div class="form-group">
+                <label for="image">@lang('site.image') </label>
+                <input type="file" class="form-control image" id="previewImg" name="image" id="image" placeholder="@lang('site.image')">
+
+                <img src="{{ asset('uploads/user_images/default.png') }}"style="width:100px"class="img-thumbnail image-preview">
+            </div>
+            <div class="form-group">
                 <label for="exampleInputEmail1">@lang('site.email') </label>
                 <input type="email" class="form-control" name="email" value="{{ old('email') }}" id="exampleInputEmail1" placeholder="@lang('site.email')">
             </div>
 
-            <div class="form-group">
-                <label for="exampleInputImage">@lang('site.image') </label>
-                <input type="file" class="form-control" name="image" id="exampleInputImage" placeholder="@lang('site.image')">
-            </div>
+            
             <div class="form-group">
                 <label for="exampleInputPassword1">@lang('site.password')</label>
                 <input type="password" class="form-control" name="password" id="exampleInputPassword1" placeholder="@lang('site.password')">
