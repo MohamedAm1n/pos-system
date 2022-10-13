@@ -8,6 +8,8 @@ use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
 use Intervention\Image\Facades\Image;
 use App\Http\Requests\StoreUserRequest;
+use Illuminate\Support\Facades\Storage;
+
 class UserController extends Controller
 {
     public function __construct()
@@ -91,6 +93,9 @@ class UserController extends Controller
 
     public function destroy(User $user)
     {
+        if($user->image != 'default.png'){
+            Storage::disk('public_uploads')->delete('/users_images/'.$user->image);
+        }
         $deleted_user=$user->id;
         User::destroy($deleted_user);
         notify()->preset('user-deleted');
