@@ -1,6 +1,6 @@
 @extends('layouts.dashboard.master')
 @section('title')
-    {{ __('site.users') }}
+    {{ __('site.categories') }}
 @endsection
 @section('content')
     <!-- Content Wrapper. Contains page content -->
@@ -13,8 +13,8 @@
                 </div>
                 <div class="col-sm-6">
                     <ol class="breadcrumb float-sm-right">
-                        <li class="breadcrumb-item"><a href="{{ route('users.index') }}">Users</a></li>
-                        <li class="breadcrumb-item active">All Users</li>
+                        <li class="breadcrumb-item"><a href="{{ route('categories.index') }}">categories</a></li>
+                        <li class="breadcrumb-item active">All categories</li>
                     </ol>
                 </div>
             </div>
@@ -28,13 +28,13 @@
                 <div class="col-12">
                     <div class="card">
                         <div class="card-header">
-                            @if (auth()->user()->hasPermission('users_create'))
-                            <h3 class="card-title"><a class="btn btn-primary btn-sm" href="{{ route('users.create') }}"><i class="fa fa-plus"></i> {{ __('site.create') }}</a></h3>
+                            @if (auth()->user()->hasPermission('categories_create'))
+                            <h3 class="card-title"><a class="btn btn-primary btn-sm" href="{{ route('categories.create') }}"><i class="fa fa-plus"></i> {{ __('site.create') }}</a></h3>
                             @else
                             <h3 class="card-title disabled"><a class="btn btn-primary btn-sm disabled " href="#"><i class="fa fa-plus"></i> {{ __('site.create') }}</a></h3>
 
                             @endif
-                            <form action="{{ route('users.index') }}" method="GET">
+                            <form action="{{ route('categories.index') }}" method="GET">
                             <div class="card-tools">
                                 <div class="input-group input-group-sm" style="width: 150px;">
                                     <input type="text" name="search" value="{{ request()->search }}" class="form-control float-right"
@@ -65,16 +65,16 @@
                                     @php
                                         $counter = 1;
                                     @endphp
-                                    @foreach ($users as $user)
+                                    @foreach ($categories as $category)
                                         <tr>
                                             <td>{{ $counter++ }}</td>
-                                            <td>{{ $user->first_name }}</td>
-                                            <td>{{ $user->last_name }}</td>
-                                            <td>{{ $user->email }}</td>
+                                            <td>{{ $category->first_name }}</td>
+                                            <td>{{ $category->last_name }}</td>
+                                            <td>{{ $category->email }}</td>
                                             <td>
-                                                @if(auth()->user()->hasPermission('users_update'))
+                                                @if(auth()->user()->hasPermission('categories_update'))
 
-                                                <a class="btn btn-info btn-sm" href="{{ route('users.edit', $user) }}">
+                                                <a class="btn btn-info btn-sm" href="{{ route('categories.edit', $category) }}">
                                                 <i class="fa fa-edit"></i>  {{ __('site.edit') }}</a>
                                                 @else
 
@@ -84,9 +84,9 @@
 
                                                 @endif
 
-                                                @if (auth()->user()->hasPermission('users_delete'))
+                                                @if (auth()->user()->hasPermission('categories_delete'))
 
-                                                <form style="display: inline-block" method="post" action="{{route('users.delete',$user)}}">
+                                                <form style="display: inline-block" method="post" action="{{route('categories.delete',$category)}}">
                                                     @csrf
                                                     <button type="submit" class="btn btn-danger btn-sm">
                                                         <i class="fa fa-trash"></i> @lang('site.delete')
@@ -108,7 +108,7 @@
                                     @endforeach
                                 </tbody>
                             </table>
-        {{ $users->appends(request()->query())->links() }}
+        {{ $categories->appends(request()->query())->links() }}
 
                         </div>
                         <!-- /.card-body -->

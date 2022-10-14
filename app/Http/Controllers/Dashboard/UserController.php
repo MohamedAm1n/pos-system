@@ -26,10 +26,14 @@ class UserController extends Controller
 
         if ($request->search){
 
-            $users=User::whereRoleIs('admin')->when($request->search,function($query) use($request){
-                return $query->where('first_name','like' ,'%' . $request->search . '%')
-                ->orWhere('last_name','like','%' . $request->search . '%');
+            $users=User::whereRoleIs('admin')->where(function($q) use($request){
+            return $q->when($request->search,function($query) use($request){
+            return $query->where('first_name','like' ,'%' . $request->search . '%')
+            ->orWhere('last_name','like','%' . $request->search . '%');
+});
             })->latest()->paginate(1);
+            
+          
         }
         else
             $users=User::whereRoleIs('admin')->paginate(10);
@@ -38,10 +42,7 @@ class UserController extends Controller
         return view('dashboard.users.user_index',['users'=>$users]);
     }
 
-    public function list(){
 
-
-}
     public function create()
     {
         return view('dashboard.users.create');
@@ -86,23 +87,27 @@ class UserController extends Controller
 
     public function update(UpdateUserRequest $request, User $user)
     {
+    // dd($request->all());
         $data= $request->validated();
         if(!$data)
             return back()->with('errors');
         
             $data=$request->except('image');
-            if($user->image != 'default.png')
-                Storage::disk('public_uploads')->delete('/users_images/'.$user->image);
+           
+           
             
             if($request->file('image')){
+                if($request->image != 'default.png'){
+                Storage::disk('public_uploads')->delete('/users_images/'.$request->image);
+                }
                 Image::make($request->image)->resize(300, null, function ($constraint) {
-                    $constraint->aspectRatio();
+                $constraint->aspectRatio();
     
             })->save(public_path('uploads/user_images/'. $request->image->hashName()));
     
             $data['image']=  $request->image->hashName();
         }
-
+     
         $user->update($data);
         $user->syncPermissions($request->permissions);
         return redirect(route('users.index'));

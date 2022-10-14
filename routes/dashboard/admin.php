@@ -3,6 +3,7 @@
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\Dashboard\UserController;
+use App\Http\Controllers\Dashboard\CategoryController;
 use App\Http\Controllers\Dashboard\DashboardController;
 use Mcamara\LaravelLocalization\Facades\LaravelLocalization;
 
@@ -23,13 +24,9 @@ Route::group([
 ],function(){
 
     Route::get('/admin',[DashboardController::class,'index'])->name('dashboard.index');
-    Route::get('/users',[UserController::class,'index'])->name('users.index');
-    Route::get('/users/create',[UserController::class,'create'])->name('users.create');
-    Route::post('/users/store',[UserController::class,'store'])->name('users.store');
-    Route::get('/users/edit/{user}',[UserController::class,'edit'])->name('users.edit');
-    Route::post('/users/update/{user}',[UserController::class,'update'])->name('users.update');
-    Route::post('/users/delete/{user}',[UserController::class,'destroy'])->name('users.delete');
 
+    Route::resource('/users',UserController::class);
 
+    Route::resource('/categories',CategoryController::class);
 });
 

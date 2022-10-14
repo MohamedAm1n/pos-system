@@ -70,7 +70,7 @@
                                     <td>{{ $counter++ }}</td>
                                     <td>{{ $user->first_name }}</td>
                                     <td>{{ $user->last_name }}</td>
-                                    <td> <img src="{{$user->image_path}}" style="width:100px;hight:100px;" class="img-thumbnail"> </td>
+                                    <td> <img src="{{$user->image_path}}" style="width:100px;height:100px;" class="img-thumbnail"> </td>
                                     <td>{{ $user->email }}</td>
                                     <td>
                                         @if(auth()->user()->hasPermission('users_update'))
@@ -87,7 +87,7 @@
 
                                         @if (auth()->user()->hasPermission('users_delete'))
 
-                                        <form style="display: inline-block" method="post" action="{{route('users.delete',$user)}}">
+                                        <form style="display: inline-block" method="post" action="{{route('users.destroy',$user)}}">
                                             @csrf
                                             <button type="submit" class="btn btn-danger btn-sm">
                                                 <i class="fa fa-trash"></i> @lang('site.delete')

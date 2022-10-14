@@ -39,9 +39,9 @@
             </div>
             <div class="form-group">
                 <label for="image">@lang('site.image') </label>
-                <input type="file" class="form-control image"  id="previewImg" name="image" id="image" placeholder="@lang('site.image')">
+                <input type="file" class="form-control image"   name="image"  placeholder="@lang('site.image')">
 
-                <img src="{{ asset('uploads/user_images/default.png') }}"style="width:100px"class="img-thumbnail image-preview">
+                <img src="{{ asset('uploads/user_images/default.png') }}"style="width:100px;height:100px;"class="img-thumbnail image-preview">
             </div>
             <div class="form-group">
                 <label for="exampleInputEmail1">@lang('site.email') </label>
