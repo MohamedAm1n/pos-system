@@ -5,6 +5,8 @@ return [
     'dashboard' =>"Dashboard",
     'users'     =>'Users',
     'create'    =>'Create New User',
+    'edit'    =>'Edit User Info',
+    'edit.p'    =>'edit user info and give him permissions',
     'create.p'  =>'create ew user and give him roles',
     'edit'      =>'Edit User Info ',
     'edit.p'    =>'edit user info and roles',

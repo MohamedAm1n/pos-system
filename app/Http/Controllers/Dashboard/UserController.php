@@ -8,6 +8,7 @@ use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
 use Intervention\Image\Facades\Image;
 use App\Http\Requests\StoreUserRequest;
+use App\Http\Requests\UpdateUserRequest;
 use Illuminate\Support\Facades\Storage;
 
 class UserController extends Controller
@@ -31,7 +32,7 @@ class UserController extends Controller
             })->latest()->paginate(1);
         }
         else
-            $users=User::paginate(10);
+            $users=User::whereRoleIs('admin')->paginate(10);
 
 
         return view('dashboard.users.user_index',['users'=>$users]);
@@ -50,14 +51,11 @@ class UserController extends Controller
     {
 
         $data=$request->validated();
-        $data=$request->except(['password','password_confirmation','image']);
         if(!$data)
-            return back()->with('errors');
+        return back()->with('errors');
 
+        $data=$request->except(['password','password_confirmation','image']);
         $data['password']=bcrypt($request['password']);
-
-
-
         if($request->file('image')){
             Image::make($request->image)->resize(300, null, function ($constraint) {
                 $constraint->aspectRatio();
@@ -82,12 +80,30 @@ class UserController extends Controller
 
     public function edit(User $user)
     {
-
+        return view('dashboard.users.edit',['user'=>$user]);
+        
     }
 
-    public function update(Request $request, User $user)
+    public function update(UpdateUserRequest $request, User $user)
     {
-        //
+        $data= $request->validated();
+        if(!$data)
+            return back()->with('errors');
+        
+            $data=$request->except('image');
+            
+            if($request->file('image')){
+                Image::make($request->image)->resize(300, null, function ($constraint) {
+                    $constraint->aspectRatio();
+    
+            })->save(public_path('uploads/user_images/'. $request->image->hashName()));
+    
+            $data['image']=  $request->image->hashName();
+        }
+
+        $user->update($data);
+        $user->syncPermissions($request->permissions);
+        return redirect(route('users.index'));
     }
 
     public function destroy(User $user)

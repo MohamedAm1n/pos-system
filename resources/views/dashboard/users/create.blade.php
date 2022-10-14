@@ -41,14 +41,14 @@
                 <label for="image">@lang('site.image') </label>
                 <input type="file" class="form-control image" id="previewImg" name="image" id="image" placeholder="@lang('site.image')">
 
-                <img src="{{ asset('uploads/user_images/default.png') }}"style="width:100px"class="img-thumbnail image-preview">
+                <img src="{{ asset('uploads/user_images/default.png') }}" style="width:100px; hight:100px;" class="img-thumbnail image-preview">
             </div>
             <div class="form-group">
                 <label for="exampleInputEmail1">@lang('site.email') </label>
-                <input type="email" class="form-control" name="email" value="{{ old('email') }}" id="exampleInputEmail1" placeholder="@lang('site.email')">
+                <input type="email" class="form-control" name="email" value="{{ old('email') }}" id="exampleInputEmail1" autocomplete="false" placeholder="@lang('site.email')">
             </div>
 
-            
+
             <div class="form-group">
                 <label for="exampleInputPassword1">@lang('site.password')</label>
                 <input type="password" class="form-control" name="password" id="exampleInputPassword1" placeholder="@lang('site.password')">
@@ -60,13 +60,13 @@
             <!-- /.card-body -->
             <div class="form-group">
                 <!-- END ALERTS AND CALLOUTS -->
-                <h5 class="mt-4 mb-2">Tabs in Cards</h5>
+                <h5 class="mt-4 mb-2">Select Permissions</h5>
 
                 <div class="row">
                     <div class="col-12">
                         <!-- Custom Tabs -->
                         @php
-                            $models=['users','categories','products'];
+                        $models=['users','profile','categories','products'];
                         @endphp
                         <div class="card">
                             <div class="card-header d-flex p-0">
@@ -83,7 +83,7 @@
                                 <div class="tab-content">
                                     @foreach ($models as $index=>$model)
 
-                                    <div class="tab-pane {{ $index == 0 ? 'active' : '' }}" id="{{ $model }}">
+                                    <div class="tab-pane {{ $index = 0 ? 'active' : '' }}" id="{{ $model }}">
                                         <div class="custom-control custom-checkbox">
                                             <input class="custom-control-input" name="permissions[]" type="checkbox" id="customCheckbox1{{ $model }}" value="{{ $model }}_create">
                                             <label for="customCheckbox1{{ $model }}" class="custom-control-label">Create {{ $model }}</label>
@@ -103,45 +103,6 @@
 
                                     </div>
                                     @endforeach
-                                    <!-- /.tab-pane -->
-                                    {{-- <div class="tab-pane" id="tab_2">
-                                        <div class="custom-control custom-checkbox">
-                                            <input class="custom-control-input" name="permissions[]" type="checkbox" id="list-home-list" value="users_create">
-                                            <label for="list-home-list" class="custom-control-label">Create User</label>
-                                        </div>
-                                        <div class="custom-control custom-checkbox">
-                                            <input class="custom-control-input" name="permissions[]" type="checkbox" id="customCheckbox2" value="users_read">
-                                            <label for="customCheckbox2" class="custom-control-label">Read User</label>
-                                        </div>
-                                        <div class="custom-control custom-checkbox">
-                                            <input class="custom-control-input" name="permissions[]" type="checkbox" id="customCheckbox3" value="users_update">
-                                            <label for="customCheckbox3" class="custom-control-label">Update User</label>
-                                        </div>
-                                        <div class="custom-control custom-checkbox">
-                                            <input class="custom-control-input" name="permissions[]" type="checkbox" id="customCheckbox4" value="users_delete">
-                                            <label for="customCheckbox4" class="custom-control-label">Delete User</label>
-                                        </div>
-                                    </div>
-                                    <!-- /.tab-pane -->
-                                    <div class="tab-pane" id="tab_3">
-                                        <div class="custom-control custom-checkbox">
-                                            <input class="custom-control-input" name="permissions[]" type="checkbox" id="list-home-list" value="users_create">
-                                            <label for="list-home-list" class="custom-control-label">Create User</label>
-                                        </div>
-                                        <div class="custom-control custom-checkbox">
-                                            <input class="custom-control-input" name="permissions[]" type="checkbox" id="customCheckbox2" value="users_read">
-                                            <label for="customCheckbox2" class="custom-control-label">Read User</label>
-                                        </div>
-                                        <div class="custom-control custom-checkbox">
-                                            <input class="custom-control-input" name="permissions[]" type="checkbox" id="customCheckbox3" value="users_update">
-                                            <label for="customCheckbox3" class="custom-control-label">Update User</label>
-                                        </div>
-                                        <div class="custom-control custom-checkbox">
-                                            <input class="custom-control-input" name="permissions[]" type="checkbox" id="customCheckbox4" value="users_delete">
-                                            <label for="customCheckbox4" class="custom-control-label">Delete User</label>
-                                        </div>
-                                    </div>
-                                    <!-- /.tab-pane --> --}}
                                 </div>
                                 <!-- /.tab-content -->
                             </div><!-- /.card-body -->
@@ -154,7 +115,7 @@
 
             </div>
             <div class="card-footer">
-                <button type="submit" class="btn btn-primary">Submit</button>
+                <button type="submit" class="btn btn-success">Submit</button>
             </div>
         </div>
     </form>
