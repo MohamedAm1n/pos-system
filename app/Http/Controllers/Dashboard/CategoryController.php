@@ -15,7 +15,7 @@ class CategoryController extends Controller
     public function index()
     {
         $categories=Category::all();
-        return view('dashboard.categories.cat_index',[$categories=>'categories']);
+        return view('dashboard.categories.cat_index',['categories'=>$categories]);
     }
 
     /**

@@ -15,11 +15,11 @@ return [
         'super_admin' => [
             'users' => 'c,r,u,d',
         
-            'profile' => 'r,u'
+            'categories' => 'c,r,u,d'
         ],
         'admin' => [
-            'users' => 'c,r,u,d',
-            
+            'users' => 'c,r,u',
+            'categories' => 'c,r,u',
         ],
     
 

@@ -49,7 +49,7 @@
                             </form>
                         </div>
                         <!-- /.card-header -->
-                        <div class="card-body table-responsive p-0">
+                        {{-- <div class="card-body table-responsive p-0">
                             <table class="table table-hover text-nowrap">
                                 <thead>
                                     <tr>
@@ -108,9 +108,9 @@
                                     @endforeach
                                 </tbody>
                             </table>
-        {{ $categories->appends(request()->query())->links() }}
+                                {{ $categories->appends(request()->query())->links() }}
 
-                        </div>
+                        </div> --}}
                         <!-- /.card-body -->
                     </div>
                     <!-- /.card -->

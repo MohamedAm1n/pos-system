@@ -25,8 +25,10 @@ Route::group([
 
     Route::get('/admin',[DashboardController::class,'index'])->name('dashboard.index');
 
-    Route::resource('/users',UserController::class);
+    // Users Route 
+    Route::resource('/users',UserController::class)->except('show');
 
-    Route::resource('/categories',CategoryController::class);
+    // Categories Route
+    Route::resource('/categories',CategoryController::class)->except('show');
 });
 

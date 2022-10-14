@@ -20,6 +20,7 @@ return [
     'password'      =>'password',
     'image'=>'personal image',
     'password_confirmation'=>'password confirmation',
+    'categories'=>'Categories',
 ];
 
 ?>

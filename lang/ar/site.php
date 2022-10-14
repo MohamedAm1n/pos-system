@@ -19,6 +19,7 @@ return[
     'image'=>'الصورة الشخصية',
     'password'=>'كلمة المرور',
     'password_confirmation'=>'تأكيد كلمة المرور',
+    'categories'=>'الأقسام'
 ];
 
 

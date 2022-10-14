@@ -26,12 +26,14 @@
     <!-- /.card-header -->
     @include('partials._errors')
     <!-- form start -->
-    <form action="{{ route('users.update',$user) }}" method="POST" enctype="multipart/form-data">
+    <form action="{{ route('users.update',$user) }}" method="PUT" enctype="multipart/form-data">
+        @method('PUT')
         @csrf
         <div class="card-body card-responsive">
             <div class="form-group">
                 <label for="first_name">@lang('site.first_name') </label>
-                <input type="text" class="form-control" name="first_name" value="{{ old('first_name') }}" id="first_name" placeholder="@lang('site.first_name')">
+                <input type="text" class="form-control" name="first_name" 
+                value="{{ old('first_name') }}" id="first_name" placeholder="@lang('site.first_name')">
             </div>
             <div class="form-group">
                 <label for="last_name">@lang('site.last_name') </label>
