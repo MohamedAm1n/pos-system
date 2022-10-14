@@ -91,6 +91,8 @@ class UserController extends Controller
             return back()->with('errors');
         
             $data=$request->except('image');
+            if($user->image != 'default.png')
+                Storage::disk('public_uploads')->delete('/users_images/'.$user->image);
             
             if($request->file('image')){
                 Image::make($request->image)->resize(300, null, function ($constraint) {
@@ -108,9 +110,9 @@ class UserController extends Controller
 
     public function destroy(User $user)
     {
-        if($user->image != 'default.png'){
+        if($user->image != 'default.png')
             Storage::disk('public_uploads')->delete('/users_images/'.$user->image);
-        }
+        
         $deleted_user=$user->id;
         User::destroy($deleted_user);
         notify()->preset('user-deleted');
