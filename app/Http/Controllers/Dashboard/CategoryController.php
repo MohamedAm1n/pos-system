@@ -41,7 +41,7 @@ class CategoryController extends Controller
             return back()->with('errors');
         Category::create($cat);
 
-        return redirect(route('categories.index'));>with('message');
+        return redirect(route('categories.index'))->with('message');
     }
 
     /**
