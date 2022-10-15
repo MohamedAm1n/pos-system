@@ -1,6 +1,5 @@
 <?php
 
-use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\Dashboard\UserController;
 use App\Http\Controllers\Dashboard\CategoryController;
@@ -20,7 +19,7 @@ Route::group([
     Route::resource('/users',UserController::class)->except('show');
 
     // Categories Route
-    Route::resource('/categories',CategoryController::class)->except('show');
+    Route::resource('/categories',CategoryController::class);
 
 
  

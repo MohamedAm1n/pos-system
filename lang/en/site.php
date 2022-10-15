@@ -22,7 +22,8 @@ return [
     'password_confirmation'=>'password confirmation',
     'categories'=>'Categories',
     'cat_name'=>'Category name',
-    'create.cat'=>'Create New Category'
+    'create.cat'=>'Create New Category',
+    'edit.cat'=>'Edit The Category',
 ];
 
 ?>

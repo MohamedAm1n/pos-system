@@ -21,7 +21,8 @@ return[
     'password_confirmation'=>'تأكيد كلمة المرور',
     'categories'=>'الأقسام',
     'cat_name'=>'اسم القسم',
-    'create.cat'=>'إضافة قسم جديد'
+    'create.cat'=>'إضافة قسم جديد',
+    'edit.cat' => 'تعديل القسم',
 ];
 
 

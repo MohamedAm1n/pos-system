@@ -29,8 +29,7 @@ class UserController extends Controller
             $users=User::whereRoleIs('admin')->where(function($q) use($request){
             return $q->when($request->search,function($query) use($request){
             return $query->where('first_name','like' ,'%' . $request->search . '%')
-            ->orWhere('last_name','like','%' . $request->search . '%');
-});
+            ->orWhere('last_name','like','%' . $request->search . '%'); });
             })->latest()->paginate(1);
             
           

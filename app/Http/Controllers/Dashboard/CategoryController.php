@@ -12,9 +12,14 @@ class CategoryController extends Controller
      *
      * @return \Illuminate\Http\Response
      */
-    public function index()
+    public function index(Request $request)
     {
-        $categories=Category::paginate(5);
+        
+            $categories=Category::when($request->search,function($q) use($request){
+                return $q->where('cat_name','like','%' . $request->search . '%');
+            })->paginate(3);
+        
+        // $categories=Category::paginate(5);
         return view('dashboard.categories.cat_index',['categories'=>$categories]);
     }
 
@@ -63,7 +68,7 @@ class CategoryController extends Controller
      */
     public function edit(Category $category)
     {
-        //
+        return view('dashboard.categories.cat_edit', ['category'=>$category]);
     }
 
     /**
@@ -75,7 +80,12 @@ class CategoryController extends Controller
      */
     public function update(Request $request, Category $category)
     {
-        //
+        // dd($request->all());
+        $cat = $request->validate(['cat_name'=>'required|string|min:3|unique:categories,cat_name']);
+        if(!$cat)
+            return back()->with('errors');
+        $category->update($cat);
+        return redirect(route('categories.index'))->with('message');
     }
 
     /**
@@ -86,6 +96,8 @@ class CategoryController extends Controller
      */
     public function destroy(Category $category)
     {
-        //
+        $cat=$category->id;
+        Category::destroy($cat);
+        return redirect(route('categories.index'));
     }
 }
