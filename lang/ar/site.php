@@ -19,7 +19,9 @@ return[
     'image'=>'الصورة الشخصية',
     'password'=>'كلمة المرور',
     'password_confirmation'=>'تأكيد كلمة المرور',
-    'categories'=>'الأقسام'
+    'categories'=>'الأقسام',
+    'cat_name'=>'اسم القسم',
+    'create.cat'=>'إضافة قسم جديد'
 ];
 
 

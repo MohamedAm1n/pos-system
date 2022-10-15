@@ -4,10 +4,10 @@
 return [
     'dashboard' =>"Dashboard",
     'users'     =>'Users',
-    'create'    =>'Create New User',
+    'create'    =>'Create New ' ,
     'edit'    =>'Edit User Info',
     'edit.p'    =>'edit user info and give him permissions',
-    'create.p'  =>'create ew user and give him roles',
+    'create.p'  =>'create new user and give him roles',
     'edit'      =>'Edit User Info ',
     'edit.p'    =>'edit user info and roles',
     'list'      =>'List  All Users ',
@@ -21,6 +21,8 @@ return [
     'image'=>'personal image',
     'password_confirmation'=>'password confirmation',
     'categories'=>'Categories',
+    'cat_name'=>'Category name',
+    'create.cat'=>'Create New Category'
 ];
 
 ?>

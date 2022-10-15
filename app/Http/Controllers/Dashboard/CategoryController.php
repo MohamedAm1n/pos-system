@@ -14,7 +14,7 @@ class CategoryController extends Controller
      */
     public function index()
     {
-        $categories=Category::all();
+        $categories=Category::paginate(5);
         return view('dashboard.categories.cat_index',['categories'=>$categories]);
     }
 
@@ -25,7 +25,7 @@ class CategoryController extends Controller
      */
     public function create()
     {
-        //
+        return view('dashboard.categories.cat_create');
     }
 
     /**
@@ -36,7 +36,12 @@ class CategoryController extends Controller
      */
     public function store(Request $request)
     {
-        //
+        $cat = $reqest->vatedate(['cat_name'=>'required|string|min:3']);
+        if(!$cat)
+            return back()->with('errors');
+        Category::create($cat);
+
+        return redirect(route('categories.index'));>with('message');
     }
 
     /**

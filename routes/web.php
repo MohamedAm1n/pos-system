@@ -22,6 +22,13 @@ Route::group([
 	'middleware' => [ 'localeSessionRedirect', 'localizationRedirect', 'localeViewPath' ]
 ], function()
 {
+/** OTHER PAGES THAT SHOULD NOT BE LOCALIZED **/
+	
+	Auth::routes(['register'=>false,'verify'=>true]);
+
+		Route::get('/home', [App\Http\Controllers\HomeController::class, 'index'])->name('home');
+
+
 	/** ADD ALL LOCALIZED ROUTES INSIDE THIS GROUP **/
 	Route::get('/', function()
 	{
@@ -30,9 +37,7 @@ Route::group([
 
 
 
-/** OTHER PAGES THAT SHOULD NOT BE LOCALIZED **/
 
-Auth::routes(['register'=>false]);
 
-Route::get('/home', [App\Http\Controllers\HomeController::class, 'index'])->name('home');
+
 });

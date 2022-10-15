@@ -21,6 +21,9 @@
         </div><!-- /.container-fluid -->
     </section>
     <!-- Main content -->
+    @php
+        $site="category";
+    @endphp
     <section class="content">
         <div class="container-fluid">
             <!-- /.row -->
@@ -31,7 +34,7 @@
                             @if (auth()->user()->hasPermission('categories_create'))
                             <h3 class="card-title"><a class="btn btn-primary btn-sm" href="{{ route('categories.create') }}"><i class="fa fa-plus"></i> {{ __('site.create') }}</a></h3>
                             @else
-                            <h3 class="card-title disabled"><a class="btn btn-primary btn-sm disabled " href="#"><i class="fa fa-plus"></i> {{ __('site.create') }}</a></h3>
+                            <h3 class="card-title disabled"><a class="btn btn-primary btn-sm disabled " href="#"><i class="fa fa-plus"></i> {{ __('site.create') . 'cat' }} </a></h3>
 
                             @endif
                             <form action="{{ route('categories.index') }}" method="GET">
@@ -49,7 +52,7 @@
                             </form>
                         </div>
                         <!-- /.card-header -->
-                        {{-- <div class="card-body table-responsive p-0">
+                        <div class="card-body table-responsive p-0">
                             <table class="table table-hover text-nowrap">
                                 <thead>
                                     <tr>
@@ -110,7 +113,7 @@
                             </table>
                                 {{ $categories->appends(request()->query())->links() }}
 
-                        </div> --}}
+                        </div>
                         <!-- /.card-body -->
                     </div>
                     <!-- /.card -->

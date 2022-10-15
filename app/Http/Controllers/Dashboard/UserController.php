@@ -7,11 +7,11 @@ use App\Models\User;
 use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
 use Intervention\Image\Facades\Image;
-use App\Http\Requests\StoreUserRequest;
-use App\Http\Requests\UpdateUserRequest;
+use App\Http\Requests\UserStoreRequest;
 use Illuminate\Support\Facades\Storage;
+use App\Http\Requests\UserUpdateRequest;
 
-class UserController extends Controller
+class UserController extends Controller 
 {
     public function __construct()
     {
@@ -48,7 +48,7 @@ class UserController extends Controller
         return view('dashboard.users.create');
     }
 
-    public function store(StoreUserRequest $request)
+    public function store(UserStoreRequest $request)
     {
 
         $data=$request->validated();
@@ -85,7 +85,7 @@ class UserController extends Controller
         
     }
 
-    public function update(UpdateUserRequest $request, User $user)
+    public function update(UserUpdateRequest $request, User $user)
     {
     // dd($request->all());
         $data= $request->validated();
