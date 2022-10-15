@@ -36,7 +36,7 @@ class CategoryController extends Controller
      */
     public function store(Request $request)
     {
-        $cat = $reqest->vatedate(['cat_name'=>'required|string|min:3']);
+        $cat = $request->validate(['cat_name'=>'required|string|min:3']);
         if(!$cat)
             return back()->with('errors');
         Category::create($cat);
