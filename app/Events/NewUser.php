@@ -31,6 +31,6 @@ class NewUser
      */
     public function broadcastOn()
     {
-        return new PrivateChannel('NewUser');
+        return new Channel('NewUser');
     }
 }

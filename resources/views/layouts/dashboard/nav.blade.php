@@ -19,11 +19,21 @@
                     <li class="nav-item active">
                         <a class="nav-link" href="{{ route('dashboard.index') }}">Home <span class="sr-only">(current)</span></a>
                     </li>
-                    <li class="nav-item">
-                        <a class="nav-link" href="#"> <i class="far fa-comments"></i>
+                    {{-- <li class="nav-item">
+                        <a class="nav-link" href="#"> <i class="fas fa-solid fa-bell"></i>
                         </a>
+                    </li> --}}
+                    <li class="nav-item dropdown-notifications">
+                        <a class="nav-link dropdown-toggle" href="#" id="navbarDropdownMenuLink" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                            <i class="fas fa-solid fa-bell"></i>
+                            <span data-count="1">1</span>
+                        </a>
+                        <div class="dropdown-menu" aria-labelledby="navbarDropdownMenuLink">
+                            
+                        <li class="scrollable-container"></li>
+                            
+                        </div>
                     </li>
-
 
 
                     {{-- Language dropdown --}}
@@ -41,7 +51,7 @@
 
                             @endforeach
                         </div>
-
+                    </li>    
                     <li class="nav-item dropdown">
                         <a class="nav-link dropdown-toggle" href="#" id="navbarDropdownMenuLink" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
                             Dropdown link
