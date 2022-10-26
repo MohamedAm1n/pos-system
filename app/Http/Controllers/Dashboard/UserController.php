@@ -10,7 +10,7 @@ use Intervention\Image\Facades\Image;
 use App\Http\Requests\UserStoreRequest;
 use Illuminate\Support\Facades\Storage;
 use App\Http\Requests\UserUpdateRequest;
-
+use App\Events\NewUser;
 class UserController extends Controller 
 {
     public function __construct()
@@ -70,6 +70,13 @@ class UserController extends Controller
         $user->attachRole('admin');
         $user->attachPermissions($data['permissions']);
         notify()->success('User Added Successfully!');
+        $data=[
+            'first_name'=>$request->first_name,
+            'created_at'=>$request->created_at,
+        ];
+            
+        
+         NewUser::dispatch($data);
         return redirect(route('users.index'));
     }
 

@@ -41,6 +41,7 @@
 <!-- AdminLTE dashboard demo (This is only for demo purposes) -->
 <script src="{{ asset('dashboard/dist/js/pages/dashboard.js') }}"></script>
 <script src="https://js.pusher.com/7.2/pusher.min.js"></script>
+
 <script>
 
     // Enable pusher logging - don't include this in production
@@ -50,11 +51,13 @@
       cluster: 'eu'
     });
 
-    var channel = pusher.subscribe('my-channel');
-    channel.bind('my-event', function(data) {
+    var channel = pusher.subscribe('New-User');
+    channel.bind('NewUser', function(data) {
       alert(JSON.stringify(data));
     });
   </script>
+  <script src="{{ asset('asset/new_user_pusher.js') }}"></script>
+  {{-- End of Pusher Script --}}
 <script>
     $(".image").change(function(){
 

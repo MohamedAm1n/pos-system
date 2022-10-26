@@ -9,7 +9,6 @@ use Illuminate\Broadcasting\PrivateChannel;
 use Illuminate\Contracts\Broadcasting\ShouldBroadcast;
 use Illuminate\Foundation\Events\Dispatchable;
 use Illuminate\Queue\SerializesModels;
-
 class NewUser
 {
     use Dispatchable, InteractsWithSockets, SerializesModels;
@@ -19,9 +18,12 @@ class NewUser
      *
      * @return void
      */
-    public function __construct()
+    public $first_name;
+    public $created_at;
+    public function __construct($data)
     {
-        //
+        $this->first_name = $data['first_name'];
+        $this->created_at = $data['created_at'];
     }
 
     /**
@@ -31,6 +33,10 @@ class NewUser
      */
     public function broadcastOn()
     {
-        return new Channel('NewUser');
+        return ['NewUser'];
     }
+    public function broadcastAs()
+  {
+      return 'NewUser';
+  }
 }

@@ -25,11 +25,25 @@
     <!-- Theme style -->
     <link rel="stylesheet" href="{{asset('dashboard/dist/css/adminlte.min.css')}}">
     <!-- overlayScrollbars -->
-    <link rel="stylesheet"href="https://cdn.jsdelivr.net/npm/fortawesome/fontawesome-free@6.2.0/css/fontawesome.min.css">
     <link rel="stylesheet" href="{{asset('dashboard/plugins/overlayScrollbars/css/OverlayScrollbars.min.css')}}">
     <!-- Daterange picker -->
     <link rel="stylesheet" href="{{asset('dashboard/plugins/daterangepicker/daterangepicker.css')}}">
     <!-- summernote -->
     <link rel="stylesheet" href="{{ asset('dashboard/plugins/summernote/summernote-bs4.min.css') }}">
+    <script src="https://js.pusher.com/7.2/pusher.min.js"></script>
+  <script>
+
+    // Enable pusher logging - don't include this in production
+    Pusher.logToConsole = true;
+
+    var pusher = new Pusher('9f05633ed49255f63af8', {
+      cluster: 'eu'
+    });
+
+    var channel = pusher.subscribe('my-channel');
+    channel.bind('my-event', function(data) {
+      alert(JSON.stringify(data));
+    });
+  </script>
     @notifyCss
 </head>

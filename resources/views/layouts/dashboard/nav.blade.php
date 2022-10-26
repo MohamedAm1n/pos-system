@@ -26,11 +26,13 @@
                     <li class="nav-item dropdown-notifications">
                         <a class="nav-link dropdown-toggle" href="#" id="navbarDropdownMenuLink" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
                             <i class="fas fa-solid fa-bell"></i>
-                            <span data-count="1">1</span>
+                            <span class="badge bade-pill badge-default badge-danger badge-up badeg-glow notif-count" data-count="1">1</span>
                         </a>
                         <div class="dropdown-menu" aria-labelledby="navbarDropdownMenuLink">
-                            
-                        <li class="scrollable-container"></li>
+
+                        <li class="scrollable-container">
+
+                        </li>
                             
                         </div>
                     </li>
